@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Console Tricks!</title>
+</head>
+<body>
+
+<p onClick="makeGreen()">×BREAK×DOWN×</p>
+
+  <script>
+    const dogs = [{ name: 'Snickers', age: 2 }, { name: 'hugo', age: 8 }];
+
+    function makeGreen() {
+      const p = document.querySelector('p');
+      p.style.color = '#BADA55';
+      p.style.fontSize = '50px';
+    }
+
+    // Regular
+    console.log('hello');
+
+    // Interpolated
+    console.log('Hello i am a %s string!' ,'abc')
+    
+    
+    // Styled
+    console.log('%c i am some great text', 'font-size:50px; background:red; text-shadow:10px 10px 0 blue');
+
+    // warning!
+    console.warn('Oh noo');
+
+    // Error :|
+    console.error('shit');
+
+    // Info
+    console.info('asdfasdf');
+
+    // Testing
+    const p =document.querySelector('p');
+    console.assert(p.classList.contains('ouch'),'멀쩡하면 아무것도 출력x');
+    //이건 어설션이 false이면 오류메세지를 콘솔에 사용 근데 멀쩡하면 아무것도 수행x
+
+    // clearing
+    console.clear();
+    //깔끔해지네
+
+    // Viewing DOM Elements
+    console.log(p);
+    console.dir(p);
+
+    // Grouping together
+    dogs.forEach(dog=> {
+        console.groupCollapsed(`${dog.name}`);
+        console.log(`This is ${dog.name}`);
+        console.log(`This is ${dog.name} is ${dog.age}`);
+        console.groupEnd(`${dog.name}`);
+    });
+
+    // counting
+    console.count('wes');
+    console.count('wes');
+    console.count('wes');
+
+    // timing
+    console.time('fetching data'); 
+    fetch('https://api.github.com/users/wesbos')
+    .then(data => data.json())
+    .then(data => {
+        console.timeEnd('fetching data');
+        console.log(data);
+    });
+    //웹브라우저야 htpp파일을 서버에게응답해줘 그럼 서버가 응답해줌 fetch()뜻
+    //서버가 데이터 꺼내서 응답해주는 시간이 걸릴수있음 그래서 작업이 끝나면 이걸 실행시켜줘 안에 넣는거 then()
+    //data.json이건 그냥 데이터 주고 받을떄 트래픽 최소화하기 위한 데이터가 드러있는 가벼운 종이 같은 개념
+    console.table(dogs);
+  </script>
+</body>
+</html>
